@@ -1,5 +1,6 @@
 import { Zap, Film, Users } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useState, useEffect, useRef } from 'react';
 
 const services = [
   {
@@ -26,6 +27,33 @@ const services = [
 ];
 
 const Services = () => {
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers = cardRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleCards((prev) => [...prev, index]);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, []);
+
   return (
     <section id="services" className="py-32 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
       {/* Background Accent */}
@@ -49,7 +77,13 @@ const Services = () => {
             return (
               <Card
                 key={index}
-                className={`group relative overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 bg-gradient-to-b ${service.gradient}`}
+                ref={(el) => (cardRefs.current[index] = el)}
+                className={`group relative overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-700 hover:shadow-2xl hover:shadow-primary/20 bg-gradient-to-b ${service.gradient} ${
+                  visibleCards.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ 
+                  transitionDelay: `${index * 200}ms`
+                }}
               >
                 <CardHeader className="space-y-6 p-8">
                   {/* Icon */}

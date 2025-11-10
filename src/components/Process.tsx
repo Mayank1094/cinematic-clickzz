@@ -1,4 +1,5 @@
 import { MessageSquare, Scissors, Rocket } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 const steps = [
   {
@@ -25,6 +26,33 @@ const steps = [
 ];
 
 const Process = () => {
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers = stepRefs.current.map((ref, index) => {
+      if (!ref) return null;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleSteps((prev) => [...prev, index]);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, []);
+
   return (
     <section id="process" className="py-32 bg-gradient-to-b from-background to-muted/20 relative">
       <div className="container mx-auto px-6">
@@ -50,8 +78,11 @@ const Process = () => {
               return (
                 <div
                   key={index}
-                  className="relative group"
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  ref={(el) => (stepRefs.current[index] = el)}
+                  className={`relative group transition-all duration-700 ${
+                    visibleSteps.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${index * 200}ms` }}
                 >
                   {/* Card */}
                   <div className="relative bg-card border-2 border-border rounded-xl p-8 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">

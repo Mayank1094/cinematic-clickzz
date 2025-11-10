@@ -1,8 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     if (element) {
@@ -30,28 +37,28 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-6 py-32 relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
+        <div className={`max-w-5xl mx-auto text-center space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 backdrop-blur-sm border border-primary/20 animate-pulse-glow">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 backdrop-blur-sm border border-primary/20 animate-pulse-glow transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <Zap className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground">20-MINUTE TURNAROUND</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black leading-none tracking-tighter">
+          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-heading font-black leading-none tracking-tighter transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             PRECISION VISUALS.
             <br />
             <span className="text-gradient">UNLOCKED.</span>
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className={`text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Media Agency specializing in <span className="text-primary font-semibold">cinematic reel edits</span>, 
             delivered in just <span className="text-secondary font-semibold">20 minutes</span>.
           </p>
 
           {/* CTA Button */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Button
               onClick={scrollToContact}
               size="lg"
@@ -78,7 +85,7 @@ const Hero = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto">
+          <div className={`grid grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="text-center space-y-2">
               <div className="text-4xl font-heading font-black text-gradient">20</div>
               <div className="text-sm text-muted-foreground uppercase tracking-wide">Minutes</div>
