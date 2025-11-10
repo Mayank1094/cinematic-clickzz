@@ -9,7 +9,7 @@ import reel5 from '@/assets/reel-5.jpg';
 import reel6 from '@/assets/reel-6.jpg';
 
 const reels = [
-  { id: 1, image: reel1, title: 'Speed & Motion', category: 'Automotive', videoUrl: 'https://www.instagram.com/reel/DQokYWPEtvD/?igsh=MWdqeHI5NWQ4NHJrOA==' },
+  { id: 1, image: reel1, title: 'Speed & Motion', category: 'Automotive', videoUrl: 'https://www.instagram.com/reel/DQokYWPEtvD/embed/' },
   { id: 2, image: reel2, title: 'Action Sports', category: 'Extreme', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
   { id: 3, image: reel3, title: 'Urban Stories', category: 'Lifestyle', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
   { id: 4, image: reel4, title: 'Racing Dynamics', category: 'Automotive', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
