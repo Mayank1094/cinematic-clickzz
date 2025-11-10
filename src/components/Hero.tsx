@@ -58,7 +58,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Button */}
-          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`flex items-center justify-center pt-8 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Button
               onClick={scrollToContact}
               size="lg"
@@ -67,21 +67,6 @@ const Hero = () => {
               START YOUR REEL
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            
-            <a 
-              href="https://www.instagram.com/clickzz.in" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group"
-            >
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-6 text-lg font-bold border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all duration-300"
-              >
-                VIEW PORTFOLIO
-              </Button>
-            </a>
           </div>
 
           {/* Trust Indicators */}
