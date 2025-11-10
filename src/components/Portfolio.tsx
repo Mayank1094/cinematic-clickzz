@@ -120,26 +120,44 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* Video Modal */}
+        {/* --- MODIFIED VIDEO MODAL --- */}
         <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-          <DialogContent className="max-w-5xl w-full p-0 bg-background border-2 border-primary overflow-hidden">
-            <DialogClose className="absolute top-4 right-4 z-50 rounded-full bg-background/80 p-2 hover:bg-background transition-colors">
-              <X className="h-6 w-6 text-foreground" />
-            </DialogClose>
-            
-            {selectedVideo && (
-              <div className="relative w-full pt-[56.25%]">
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={selectedVideo}
-                  title="Video Player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            )}
-          </DialogContent>
+          {(() => {
+            // Check what kind of video is selected
+            const isYouTube = selectedVideo?.includes('youtube.com');
+
+            // Dynamically set modal classes
+            const modalClasses = isYouTube
+              ? 'max-w-5xl w-full p-0 bg-background border-2 border-primary overflow-hidden' // Landscape
+              : 'max-w-sm w-full p-0 bg-background border-2 border-primary overflow-hidden rounded-lg'; // Portrait
+
+            // Dynamically set video container aspect ratio
+            const containerClasses = isYouTube
+              ? 'relative w-full pt-[56.25%]' // 16:9 aspect ratio
+              : 'relative w-full pt-[130%]'; // Tall portrait aspect ratio
+
+            return (
+              <DialogContent className={modalClasses}>
+                <DialogClose className="absolute top-4 right-4 z-50 rounded-full bg-background/80 p-2 hover:bg-background transition-colors">
+                  <X className="h-6 w-6 text-foreground" />
+                </DialogClose>
+                
+                {selectedVideo && (
+                  <div className={containerClasses}>
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
+                      src={selectedVideo}
+                      title="Video Player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
+              </DialogContent>
+            );
+          })()}
         </Dialog>
+        
       </div>
     </section>
   );
