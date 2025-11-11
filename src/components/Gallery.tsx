@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Replace these URLs with your actual Instagram reel embed URLs
 // Format: https://www.instagram.com/reel/REEL_ID/embed/
@@ -14,7 +16,7 @@ const instagramReels = [
   'https://www.instagram.com/reel/REEL_ID_9/embed/',
 ];
 
-const Gallery = () => {
+const Gallery = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [visibleReels, setVisibleReels] = useState<number[]>([]);
   const reelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -42,9 +44,21 @@ const Gallery = () => {
     };
   }, []);
 
+  if (!isOpen) return null;
+
   return (
-    <section id="gallery" className="py-32 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-32 bg-background border-t-2 border-primary/20 animate-fade-in">
+      <div className="container mx-auto px-6 relative">
+        {/* Close Button */}
+        <Button
+          onClick={onClose}
+          variant="outline"
+          size="icon"
+          className="absolute top-0 right-6 z-50 rounded-full border-2 border-primary hover:bg-primary/20"
+        >
+          <X className="h-6 w-6" />
+        </Button>
+
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-5xl md:text-6xl font-heading font-black text-gradient">

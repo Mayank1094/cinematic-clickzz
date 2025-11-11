@@ -3,7 +3,7 @@ import { ArrowRight, Zap } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
 import { useState, useEffect } from 'react';
 
-const Hero = () => {
+const Hero = ({ onGalleryToggle }: { onGalleryToggle: () => void }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -17,11 +17,14 @@ const Hero = () => {
     }
   };
 
-  const scrollToGallery = () => {
-    const element = document.getElementById('gallery');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleGalleryClick = () => {
+    onGalleryToggle();
+    setTimeout(() => {
+      const element = document.getElementById('gallery');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
@@ -75,7 +78,7 @@ const Hero = () => {
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
-              onClick={scrollToGallery}
+              onClick={handleGalleryClick}
               size="lg"
               variant="outline"
               className="group border-2 border-primary text-foreground hover:bg-primary/10 px-8 py-6 text-lg font-bold transition-all duration-300 hover:scale-105"

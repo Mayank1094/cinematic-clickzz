@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Portfolio from '@/components/Portfolio';
@@ -8,12 +9,14 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 const Index = () => {
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Nav />
-      <Hero />
+      <Hero onGalleryToggle={() => setIsGalleryOpen(!isGalleryOpen)} />
       <Portfolio />
-      <Gallery />
+      <Gallery isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />
       <Services />
       <Process />
       <Contact />
