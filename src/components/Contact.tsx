@@ -4,6 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Instagram, Mail, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+});
 
 const Contact = () => {
   const { toast } = useToast();
@@ -16,21 +23,26 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
+    // Validate form data
+    const validation = contactSchema.safeParse(formData);
+    
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
       toast({
-        title: 'Missing Information',
-        description: 'Please fill in all fields.',
+        title: 'Invalid Input',
+        description: firstError.message,
         variant: 'destructive',
       });
       return;
     }
 
-    // In a real app, this would send to a backend
-    toast({
-      title: 'Message Sent! ⚡',
-      description: "We'll get back to you within 24 hours.",
-    });
+    // Send to WhatsApp
+    const { name, email, message } = validation.data;
+    const whatsappNumber = '916361536052';
+    const whatsappMessage = `*New Contact Form Submission*\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    window.open(whatsappUrl, '_blank');
 
     // Reset form
     setFormData({ name: '', email: '', message: '' });
