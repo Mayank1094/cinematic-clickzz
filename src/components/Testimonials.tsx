@@ -4,21 +4,21 @@ import { useState, useEffect, useRef } from 'react';
 
 const testimonials = [
   {
-    name: 'Priya Sharma',
-    role: 'Wedding Photographer',
-    content: 'Clickzz transformed our raw wedding footage into cinematic masterpieces. The 20-minute turnaround is unbelievable! Our clients are absolutely thrilled with the quality.',
+    name: 'dream High badminton Academy',
+    role: 'Badminton Academy',
+    content: 'Clickzz transformed our raw Academy coaching footage into cinematic masterpieces. The 20-minute turnaround is unbelievable! Our clients are absolutely thrilled with the quality.',
     rating: 5,
   },
   {
-    name: 'Rahul Mehta',
-    role: 'Content Creator',
-    content: 'Working with Clickzz has been game-changing for my content strategy. Their attention to detail and understanding of platform optimization is exceptional. Highly recommend!',
+    name: 'Ashapura Electricals',
+    role: 'Electronic stores',
+    content: 'We needed a way to showcase our new product line and our storefront. Clickzz delivered a reel that was sharp, fast-paced, and incredibly high-quality. Our customers loved it, and we saw a direct increase in foot traffic from social media. They made our electrical products look cinematic, which we didn't think was possible!',
     rating: 5,
   },
   {
-    name: 'Ananya Desai',
-    role: 'Event Manager',
-    content: 'The team at Clickzz delivers premium visuals every single time. Their partnership approach goes beyond just editing—they truly understand storytelling. Worth every penny!',
+    name: 'Shreyas Kenikar',
+    role: 'Rider',
+    content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—it\'s all next-level. They delivered the final reel in just 20 minutes, faster than I could even pack up my gear. Absolutely game-changing!',
     rating: 5,
   },
 ];
