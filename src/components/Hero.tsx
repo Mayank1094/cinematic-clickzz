@@ -47,9 +47,9 @@ const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
 
           {/* Main Headline */}
           <h1 className={`text-5xl md:text-7xl lg:text-8xl font-heading font-black leading-none tracking-tighter transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            PRECISION VISUALS.
+            TURNING MOMENTS
             <br />
-            <span className="text-gradient">UNLOCKED.</span>
+            <span className="text-gradient">INTO MASTERPIECES</span>
           </h1>
 
           {/* Sub-headline */}

@@ -199,7 +199,7 @@ const Contact = () => {
           <div className="mt-12 grid md:grid-cols-2 gap-6">
             {/* Email */}
             <a
-              href="mailto:hello@clickzz.in"
+              href="mailto:clickzz.in1@gmail.com"
               className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg text-foreground hover:text-primary hover:border-primary transition-all group"
             >
               <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -207,7 +207,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground uppercase tracking-wide">Email</p>
-                <span className="font-semibold">hello@clickzz.in</span>
+                <span className="font-semibold">clickzz.in1@gmail.com</span>
               </div>
             </a>
 
