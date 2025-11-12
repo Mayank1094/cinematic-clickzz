@@ -12,13 +12,13 @@ const testimonials = [
   {
     name: 'Ashapura Electricals',
     role: 'Electronic stores',
-    content: 'We needed a way to showcase our new product line and our storefront. Clickzz delivered a reel that was sharp, fast-paced, and incredibly high-quality. Our customers loved it, and we saw a direct increase in foot traffic from social media. They made our electrical products look cinematic, which we didn't think was possible!',
+    content: 'We needed a way to showcase our new product line and our storefront. Clickzz delivered a reel that was sharp, fast-paced, and incredibly high-quality. Our customers loved it, and we saw a direct increase in foot traffic from social media. They made our electrical products look cinematic, which we could not think was possible!',
     rating: 5,
   },
   {
     name: 'Shreyas Kenikar',
     role: 'Rider',
-    content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—it\'s all next-level. They delivered the final reel in just 20 minutes, faster than I could even pack up my gear. Absolutely game-changing!',
+    content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—its all next-level. They delivered the final reel in just 20 minutes, faster than I could even pack up my gear. Absolutely game-changing!',
     rating: 5,
   },
 ];
