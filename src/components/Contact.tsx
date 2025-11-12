@@ -2,22 +2,28 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Instagram, Mail, Send } from 'lucide-react';
+import { Instagram, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  fullName: z.string().trim().min(1, "Full name is required").max(100, "Name must be less than 100 characters"),
+  phoneNumber: z.string().trim().min(10, "Valid phone number is required").max(15, "Phone number must be less than 15 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+  eventDate: z.string().trim().min(1, "Event date is required"),
+  eventType: z.string().trim().min(1, "Event type is required"),
+  homeAddress: z.string().trim().min(1, "Home address is required").max(500, "Address must be less than 500 characters"),
 });
 
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
+    phoneNumber: '',
     email: '',
-    message: '',
+    eventDate: '',
+    eventType: 'Wedding',
+    homeAddress: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,18 +43,18 @@ const Contact = () => {
     }
 
     // Send to WhatsApp
-    const { name, email, message } = validation.data;
-    const whatsappNumber = '916361536052';
-    const whatsappMessage = `*New Contact Form Submission*\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
+    const { fullName, phoneNumber, email, eventDate, eventType, homeAddress } = validation.data;
+    const whatsappNumber = '919900893382';
+    const whatsappMessage = `*New Booking Request*\n\n*Full Name:* ${fullName}\n*Phone:* ${phoneNumber}\n*Email:* ${email}\n*Event Date:* ${eventDate}\n*Event Type:* ${eventType}\n*Home Address:* ${homeAddress}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     
     window.open(whatsappUrl, '_blank');
 
     // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ fullName: '', phoneNumber: '', email: '', eventDate: '', eventType: 'Wedding', homeAddress: '' });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -61,138 +67,165 @@ const Contact = () => {
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
 
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-5xl md:text-6xl font-heading font-black text-gradient">
-              LET'S CONNECT
+          <div className="text-center mb-12 space-y-3">
+            <h2 className="text-5xl md:text-6xl font-heading font-black text-foreground">
+              Book Your Date
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Ready to create something extraordinary? Reach out and let's make it happen.
+            <p className="text-lg text-muted-foreground">
+              Fill the form below. We will contact you to confirm details.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="space-y-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Booking Form */}
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 shadow-xl">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Row 1: Full Name & Phone Number */}
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-semibold text-foreground uppercase tracking-wide">
-                    Your Name
+                  <label htmlFor="fullName" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                    Full Name
                   </label>
                   <Input
-                    id="name"
-                    name="name"
+                    id="fullName"
+                    name="fullName"
                     type="text"
                     placeholder="John Doe"
-                    value={formData.name}
+                    value={formData.fullName}
                     onChange={handleChange}
-                    className="bg-card border-2 border-border focus:border-primary transition-colors"
+                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-semibold text-foreground uppercase tracking-wide">
-                    Email Address
+                  <label htmlFor="phoneNumber" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                    Phone Number
                   </label>
                   <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    value={formData.phoneNumber}
                     onChange={handleChange}
-                    className="bg-card border-2 border-border focus:border-primary transition-colors"
+                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email Address */}
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  Email Address
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                />
+              </div>
+
+              {/* Row 3: Event Date & Event Type */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="eventDate" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                    Event Date
+                  </label>
+                  <Input
+                    id="eventDate"
+                    name="eventDate"
+                    type="date"
+                    value={formData.eventDate}
+                    onChange={handleChange}
+                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-semibold text-foreground uppercase tracking-wide">
-                    Project Details
+                  <label htmlFor="eventType" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                    Event Type
                   </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your project..."
-                    value={formData.message}
+                  <select
+                    id="eventType"
+                    name="eventType"
+                    value={formData.eventType}
                     onChange={handleChange}
-                    rows={6}
-                    className="bg-card border-2 border-border focus:border-primary transition-colors resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-105"
-                >
-                  Send Message
-                  <Send className="ml-2 w-5 h-5" />
-                </Button>
-              </form>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-8">
-              {/* Info Card */}
-              <div className="bg-card border-2 border-border rounded-xl p-8 space-y-6">
-                <div>
-                  <h3 className="text-2xl font-heading font-black mb-4">Get in Touch</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Whether you need a quick turnaround or a long-term content partnership, we're here to help bring your vision to life.
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  {/* Email */}
-                  <a
-                    href="mailto:hello@clickzz.in"
-                    className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group"
+                    className="w-full h-12 px-3 bg-background/50 border border-border rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors text-foreground"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <span className="font-medium">hello@clickzz.in</span>
-                  </a>
-
-                  {/* Instagram */}
-                  <a
-                    href="https://www.instagram.com/clickzz.in"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-foreground hover:text-secondary transition-colors group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                      <Instagram className="w-5 h-5" />
-                    </div>
-                    <span className="font-medium">@clickzz.in</span>
-                  </a>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Pre-Wedding">Pre-Wedding</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Corporate Event">Corporate Event</option>
+                    <option value="Music Video">Music Video</option>
+                    <option value="Product Launch">Product Launch</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div>
 
-              {/* Stats Card */}
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/20 rounded-xl p-8">
-                <h4 className="text-xl font-heading font-black mb-4">Why Choose Us?</h4>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">⚡</span>
-                    <span>Lightning-fast 20-minute turnaround</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">🎬</span>
-                    <span>Cinematic quality from iPhone footage</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">🤝</span>
-                    <span>Strategic content partnership</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold">📱</span>
-                    <span>Optimized for all social platforms</span>
-                  </li>
-                </ul>
+              {/* Row 4: Home Address */}
+              <div className="space-y-2">
+                <label htmlFor="homeAddress" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  Home Address
+                </label>
+                <Textarea
+                  id="homeAddress"
+                  name="homeAddress"
+                  placeholder="Enter your full address..."
+                  value={formData.homeAddress}
+                  onChange={handleChange}
+                  rows={3}
+                  className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors resize-none"
+                />
               </div>
-            </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] h-12 mt-8"
+              >
+                Book Now
+              </Button>
+            </form>
+          </div>
+
+          {/* Contact Info Below Form */}
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
+            {/* Email */}
+            <a
+              href="mailto:hello@clickzz.in"
+              className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg text-foreground hover:text-primary hover:border-primary transition-all group"
+            >
+              <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">Email</p>
+                <span className="font-semibold">hello@clickzz.in</span>
+              </div>
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/clickzz.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg text-foreground hover:text-secondary hover:border-secondary transition-all group"
+            >
+              <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                <Instagram className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">Instagram</p>
+                <span className="font-semibold">@clickzz.in</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
