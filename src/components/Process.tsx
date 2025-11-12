@@ -1,4 +1,5 @@
 import { MessageSquare, Scissors, Rocket } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useState, useEffect, useRef } from 'react';
 
 const steps = [
@@ -54,7 +55,10 @@ const Process = () => {
   }, []);
 
   return (
-    <section id="process" className="py-32 bg-gradient-to-b from-background to-muted/20 relative">
+    <section id="process" className="py-32 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-20 space-y-4">
@@ -66,60 +70,55 @@ const Process = () => {
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="max-w-6xl mx-auto relative">
-          {/* Connection Line - Desktop */}
-          <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary opacity-30" />
-
-          {/* Steps */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (stepRefs.current[index] = el)}
-                  className={`relative group transition-all duration-700 ${
-                    visibleSteps.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  {/* Card */}
-                  <div className="relative bg-card border-2 border-border rounded-xl p-8 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+        {/* Process Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <Card
+                key={index}
+                ref={(el) => (stepRefs.current[index] = el)}
+                className={`group relative overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-700 hover:shadow-2xl hover:shadow-primary/20 bg-gradient-to-b from-primary/5 to-background ${
+                  visibleSteps.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ 
+                  transitionDelay: `${index * 200}ms`
+                }}
+              >
+                <CardHeader className="space-y-6 p-8">
+                  {/* Icon */}
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-lg bg-card flex items-center justify-center border-2 border-border group-hover:border-primary/50 transition-all duration-500 group-hover:scale-110">
+                      <Icon className={`w-8 h-8 ${step.color} group-hover:drop-shadow-glow transition-all`} />
+                    </div>
+                    
                     {/* Number Badge */}
-                    <div className="absolute -top-6 left-8 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-heading font-black shadow-lg">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
                       {step.number}
                     </div>
-
-                    {/* Icon */}
-                    <div className="mt-8 mb-6">
-                      <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-muted to-background flex items-center justify-center border-2 border-border group-hover:border-primary/50 transition-all duration-500 group-hover:scale-110">
-                        <Icon className={`w-8 h-8 ${step.color}`} />
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-2xl font-heading font-black mb-4 group-hover:text-primary transition-colors">
-                      {step.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
-
-                    {/* Bottom Accent */}
-                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-700 rounded-b-xl" />
                   </div>
 
-                  {/* Arrow Connector - Desktop Only */}
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-24 -right-4 w-8 h-8 transform rotate-45 border-t-2 border-r-2 border-primary opacity-30" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  {/* Title */}
+                  <CardTitle className="text-2xl font-heading font-black tracking-tight group-hover:text-primary transition-colors">
+                    {step.title}
+                  </CardTitle>
+
+                  {/* Description */}
+                  <CardDescription className="text-base text-muted-foreground leading-relaxed">
+                    {step.description}
+                  </CardDescription>
+
+                  {/* Animated Border */}
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-700" />
+                </CardHeader>
+              </Card>
+            );
+          })}
+        </div>
+
+        {/* Bottom Accent Line */}
+        <div className="mt-20 max-w-7xl mx-auto">
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
 
         {/* CTA */}
