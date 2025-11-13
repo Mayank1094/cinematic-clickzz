@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Upload } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 // Import video files from assets folder
 // Make sure to add post1.mp4 to post10.mp4 in src/assets folder
@@ -21,20 +20,7 @@ const defaultVideos: string[] = [
 const Gallery = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [visibleVideos, setVisibleVideos] = useState<number[]>([]);
-  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]);
   const videoRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  // Combine default videos with uploaded ones
-  const allVideos = [...defaultVideos, ...uploadedVideos];
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files) return;
-
-    const newVideos = Array.from(files).map(file => URL.createObjectURL(file));
-    setUploadedVideos(prev => [...prev, ...newVideos]);
-  };
 
   useEffect(() => {
     if (!isExpanded) return;
@@ -60,7 +46,7 @@ const Gallery = () => {
     return () => {
       observers.forEach((observer) => observer?.disconnect());
     };
-  }, [isExpanded, allVideos.length]);
+  }, [isExpanded]);
 
   return (
     <section id="gallery" className="py-16 bg-gradient-to-b from-muted/20 to-background border-t-2 border-primary/20">
@@ -81,35 +67,10 @@ const Gallery = () => {
           </Button>
         </div>
 
-        {/* Upload Section */}
-        {isExpanded && (
-          <div className="mb-8 animate-fade-in">
-            <div className="flex justify-center">
-              <Button
-                onClick={() => fileInputRef.current?.click()}
-                variant="outline"
-                size="lg"
-                className="gap-2"
-              >
-                <Upload className="w-5 h-5" />
-                Upload Videos
-              </Button>
-              <Input
-                ref={fileInputRef}
-                type="file"
-                accept="video/*"
-                multiple
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </div>
-          </div>
-        )}
-
         {/* Expandable Video Grid */}
         {isExpanded && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto animate-fade-in">
-            {allVideos.map((videoUrl, index) => (
+            {defaultVideos.map((videoUrl, index) => (
                 <div
                   key={index}
                   ref={(el) => (videoRefs.current[index] = el)}
