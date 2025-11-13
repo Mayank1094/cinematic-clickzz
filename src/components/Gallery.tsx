@@ -3,20 +3,30 @@ import { ChevronDown, ChevronUp, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-// Add your video files to src/assets and import them here
-// Example: import video1 from '@/assets/video1.mp4';
-const videos: string[] = [
-  // Add your video paths here
-  // video1,
-  // video2,
+// Import video files from assets folder
+// Make sure to add post1.mp4 to post10.mp4 in src/assets folder
+const defaultVideos: string[] = [
+  '/src/assets/post1.mp4',
+  '/src/assets/post2.mp4',
+  '/src/assets/post3.mp4',
+  '/src/assets/post4.mp4',
+  '/src/assets/post5.mp4',
+  '/src/assets/post6.mp4',
+  '/src/assets/post7.mp4',
+  '/src/assets/post8.mp4',
+  '/src/assets/post9.mp4',
+  '/src/assets/post10.mp4',
 ];
 
 const Gallery = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [visibleVideos, setVisibleVideos] = useState<number[]>([]);
-  const [uploadedVideos, setUploadedVideos] = useState<string[]>(videos);
+  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]);
   const videoRefs = useRef<(HTMLDivElement | null)[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Combine default videos with uploaded ones
+  const allVideos = [...defaultVideos, ...uploadedVideos];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -50,7 +60,7 @@ const Gallery = () => {
     return () => {
       observers.forEach((observer) => observer?.disconnect());
     };
-  }, [isExpanded, uploadedVideos.length]);
+  }, [isExpanded, allVideos.length]);
 
   return (
     <section id="gallery" className="py-16 bg-gradient-to-b from-muted/20 to-background border-t-2 border-primary/20">
@@ -99,13 +109,7 @@ const Gallery = () => {
         {/* Expandable Video Grid */}
         {isExpanded && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto animate-fade-in">
-            {uploadedVideos.length === 0 ? (
-              <div className="col-span-full text-center py-12 text-muted-foreground">
-                <Upload className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg">No videos yet. Upload your first video to get started!</p>
-              </div>
-            ) : (
-              uploadedVideos.map((videoUrl, index) => (
+            {allVideos.map((videoUrl, index) => (
                 <div
                   key={index}
                   ref={(el) => (videoRefs.current[index] = el)}
@@ -126,8 +130,7 @@ const Gallery = () => {
                     />
                   </div>
                 </div>
-              ))
-            )}
+              ))}
           </div>
         )}
       </div>

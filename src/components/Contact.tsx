@@ -29,6 +29,21 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Check rate limiting (5 minutes cooldown)
+    const lastSubmitTime = localStorage.getItem('lastContactSubmit');
+    const now = Date.now();
+    const fiveMinutes = 5 * 60 * 1000;
+    
+    if (lastSubmitTime && (now - parseInt(lastSubmitTime)) < fiveMinutes) {
+      const remainingTime = Math.ceil((fiveMinutes - (now - parseInt(lastSubmitTime))) / 60000);
+      toast({
+        title: 'Please Wait',
+        description: `You can submit another message in ${remainingTime} minute(s).`,
+        variant: 'destructive',
+      });
+      return;
+    }
+    
     // Validate form data
     const validation = contactSchema.safeParse(formData);
     
@@ -47,6 +62,9 @@ const Contact = () => {
     const whatsappNumber = '919900893382';
     const whatsappMessage = `*New Booking Request*\n\n*Full Name:* ${fullName}\n*Phone:* ${phoneNumber}\n*Email:* ${email}\n*Event Date:* ${eventDate}\n*Event Type:* ${eventType}\n*Home Address:* ${homeAddress}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // Store submission time
+    localStorage.setItem('lastContactSubmit', now.toString());
     
     window.open(whatsappUrl, '_blank');
 
