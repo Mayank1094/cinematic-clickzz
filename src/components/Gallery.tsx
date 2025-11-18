@@ -84,8 +84,32 @@ const Gallery = () => {
                       playsInline
                     />
                   </div>
+                  {/* Compression message */}
+                  <p className="text-center text-sm text-muted-foreground mt-3 italic">
+                    This Video is Being Compressed! See the Original Version in HD
+                  </p>
                 </div>
               ))}
+          </div>
+        )}
+
+        {/* HD Button at the end */}
+        {isExpanded && (
+          <div className="text-center mt-8">
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="px-8 py-6 text-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              <a 
+                href="https://drive.google.com/drive/folders/1cDPDdl3IZE_egO0jO8f2sgycEDu9xuxI" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                View HD
+              </a>
+            </Button>
           </div>
         )}
       </div>
