@@ -4,21 +4,22 @@ import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 import reel1 from '@/assets/reel-1.jpg';
 import reel2 from '@/assets/reel-2.jpg';
 import reel3 from '@/assets/reel-3.jpg';
-import reel4 from '@/assets/reel-4.jpg';
+import reel4 from '@/assets/reel-4.jpg'; // Kept imports just in case you need them later
 import reel5 from '@/assets/reel-5.jpg';
 import reel6 from '@/assets/reel-6.jpg';
 
 const reels = [
   { id: 1, image: reel1, title: 'Speed & Motion', category: 'Automotive', videoUrl: 'https://www.instagram.com/reel/DQokYWPEtvD/embed/' },
   { id: 2, image: reel2, title: 'Action Sports', category: 'Extreme', videoUrl: 'https://www.instagram.com/reel/DPvZLdJEq35/embed/' },
-  { id: 3, image: reel3, title: 'Urban Stories', category: 'Lifestyle', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+  // UPDATED: Changed this to the Instagram link you provided + added /embed/
+  { id: 3, image: reel3, title: 'Urban Stories', category: 'Lifestyle', videoUrl: 'https://www.instagram.com/p/DP37PHtEjIu/embed/' },
 ];
 
 const Portfolio = () => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-  const [visibleItems, setVisibleItems] = useState<number[]>([]);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [hoveredId, setHoveredId] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [visibleItems, setVisibleItems] = useState([]);
+  const itemRefs = useRef([]);
 
   useEffect(() => {
     const observers = itemRefs.current.map((ref, index) => {
@@ -120,7 +121,7 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* --- MODIFIED VIDEO MODAL --- */}
+        {/* --- VIDEO MODAL --- */}
         <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
           {(() => {
             // Check what kind of video is selected
@@ -128,8 +129,8 @@ const Portfolio = () => {
 
             // Dynamically set modal classes
             const modalClasses = isYouTube
-              ? 'max-w-5xl w-full p-0 bg-background border-2 border-primary overflow-hidden' // Landscape
-              : 'max-w-sm w-full p-0 bg-background border-2 border-primary overflow-hidden rounded-lg'; // Portrait
+              ? 'max-w-5xl w-full p-0 bg-background border-2 border-primary overflow-hidden' // Landscape (YouTube)
+              : 'max-w-sm w-full p-0 bg-background border-2 border-primary overflow-hidden rounded-lg'; // Portrait (Instagram)
 
             // Dynamically set video container aspect ratio
             const containerClasses = isYouTube
