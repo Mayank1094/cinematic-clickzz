@@ -86,7 +86,7 @@ const Gallery = () => {
                   </div>
                   {/* Compression message */}
                   <p className="text-center text-sm text-muted-foreground mt-3 italic">
-                    This Video is Being Compressed! See the Original Version in HD
+                    All Videos are Being Compressed! due to some issue See all the Original Version of videos in HD
                   </p>
                 </div>
               ))}
