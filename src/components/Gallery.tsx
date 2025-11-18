@@ -2,31 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// Import video files from assets folder
-// Add more video imports as you upload them to src/assets folder
-import post1 from '@/assets/post1.mp4';
-// import post2 from '@/assets/post2.mp4';
-// import post3 from '@/assets/post3.mp4';
-// import post4 from '@/assets/post4.mp4';
-// import post5 from '@/assets/post5.mp4';
-// import post6 from '@/assets/post6.mp4';
-// import post7 from '@/assets/post7.mp4';
-// import post8 from '@/assets/post8.mp4';
-// import post9 from '@/assets/post9.mp4';
-// import post10 from '@/assets/post10.mp4';
-
+// JioCloud video URLs - Add your JioCloud direct public links here
 const defaultVideos: string[] = [
-  post1,
-  // Uncomment these as you upload more videos
-  // post2,
-  // post3,
-  // post4,
-  // post5,
-  // post6,
-  // post7,
-  // post8,
-  // post9,
-  // post10,
+  'https://www.jiocloud.com/l/?u=G-64Js0SUl_dWmRGQWfCPf9AlDJVRvsq7iqzwzV3FlWHB105_d6Jfu7KiL5GKrXlMZA',
+  // Add more JioCloud video links below
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_2',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_3',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_4',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_5',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_6',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_7',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_8',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_9',
+  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_10',
 ];
 
 const Gallery = () => {
