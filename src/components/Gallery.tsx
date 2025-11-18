@@ -1,20 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import post1 from '@/assets/post1.mp4';
 
-// JioCloud video URLs - Add your JioCloud direct public links here
+// Video files - Add more as you upload them to src/assets
 const defaultVideos: string[] = [
-  'https://www.jiocloud.com/l/?u=G-64Js0SUl_dWmRGQWfCPf9AlDJVRvsq7iqzwzV3FlWHB105_d6Jfu7KiL5GKrXlMZA',
-  // Add more JioCloud video links below
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_2',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_3',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_4',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_5',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_6',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_7',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_8',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_9',
-  // 'https://www.jiocloud.com/l/?u=YOUR_VIDEO_LINK_10',
+  post1,
+  // Add more videos as you upload them
+  // post2,
+  // post3,
 ];
 
 const Gallery = () => {
@@ -83,12 +77,11 @@ const Gallery = () => {
                 >
                   {/* Portrait aspect ratio for vertical videos */}
                   <div className="relative w-full pt-[177.78%]">
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
+                    <video
+                      className="absolute inset-0 w-full h-full object-cover"
                       src={videoUrl}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
+                      controls
+                      playsInline
                     />
                   </div>
                 </div>
