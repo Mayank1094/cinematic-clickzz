@@ -3,29 +3,30 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // Import video files from assets folder
-// Make sure to add post1.mp4 to post10.mp4 in src/assets folder
+// Add more video imports as you upload them to src/assets folder
 import post1 from '@/assets/post1.mp4';
-import post2 from '@/assets/post2.mp4';
-import post3 from '@/assets/post3.mp4';
-import post4 from '@/assets/post4.mp4';
-import post5 from '@/assets/post5.mp4';
-import post6 from '@/assets/post6.mp4';
-import post7 from '@/assets/post7.mp4';
-import post8 from '@/assets/post8.mp4';
-import post9 from '@/assets/post9.mp4';
-import post10 from '@/assets/post10.mp4';
+// import post2 from '@/assets/post2.mp4';
+// import post3 from '@/assets/post3.mp4';
+// import post4 from '@/assets/post4.mp4';
+// import post5 from '@/assets/post5.mp4';
+// import post6 from '@/assets/post6.mp4';
+// import post7 from '@/assets/post7.mp4';
+// import post8 from '@/assets/post8.mp4';
+// import post9 from '@/assets/post9.mp4';
+// import post10 from '@/assets/post10.mp4';
 
 const defaultVideos: string[] = [
   post1,
-  post2,
-  post3,
-  post4,
-  post5,
-  post6,
-  post7,
-  post8,
-  post9,
-  post10,
+  // Uncomment these as you upload more videos
+  // post2,
+  // post3,
+  // post4,
+  // post5,
+  // post6,
+  // post7,
+  // post8,
+  // post9,
+  // post10,
 ];
 
 const Gallery = () => {
