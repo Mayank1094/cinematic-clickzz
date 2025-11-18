@@ -72,7 +72,7 @@ const Footer = () => {
                 <span>@clickzz.in</span>
               </a>
               <a
-                href="mailto:hello@clickzz.in"
+                href="mailto:clickzz.in1@gmail.com"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
