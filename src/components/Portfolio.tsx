@@ -55,6 +55,9 @@ const Portfolio = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Cinematic reels that capture speed, precision, and storytelling—shot on iPhone, edited to perfection.
           </p>
+          <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mt-2">
+            Click on any image to watch the video.
+          </p>
         </div>
 
         {/* Masonry Grid */}
