@@ -83,11 +83,12 @@ const Gallery = () => {
                 >
                   {/* Portrait aspect ratio for vertical videos */}
                   <div className="relative w-full pt-[177.78%]">
-                    <video
-                      className="absolute inset-0 w-full h-full object-cover"
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
                       src={videoUrl}
-                      controls
-                      playsInline
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
                     />
                   </div>
                 </div>
