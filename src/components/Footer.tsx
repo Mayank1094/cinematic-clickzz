@@ -69,7 +69,7 @@ const Footer = () => {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-secondary transition-colors group"
               >
                 <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>@clickzz.in</span>
+                <span>clickzz.in1@gmail.com</span>
               </a>
               <a
                 href="mailto:clickzz.in1@gmail.com"
