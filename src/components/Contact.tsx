@@ -5,7 +5,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Instagram, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import qrCode from '@/assets/qr-code.png';
 
 const contactSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(100, "Name must be less than 100 characters"),
@@ -245,20 +244,6 @@ const Contact = () => {
                 <span className="font-semibold">@clickzz.in</span>
               </div>
             </a>
-          </div>
-
-          {/* QR Code Section */}
-          <div className="mt-12 flex flex-col items-center justify-center space-y-4">
-            <div className="bg-card border-2 border-primary rounded-2xl p-8 shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
-              <img 
-                src={qrCode} 
-                alt="Event Registration QR Code - Scan to Register" 
-                className="w-64 h-64 object-contain"
-              />
-            </div>
-            <p className="text-lg font-semibold text-primary animate-pulse">
-              📱 Scan to Register for Events
-            </p>
           </div>
         </div>
       </div>
