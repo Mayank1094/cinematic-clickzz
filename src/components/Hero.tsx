@@ -42,7 +42,7 @@ const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
           {/* Badge */}
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 backdrop-blur-sm border border-primary/20 animate-pulse-glow transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <Zap className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">20-MINUTE TURNAROUND</span>
+            <span className="text-sm font-medium text-foreground">30-MINUTE TURNAROUND</span>
           </div>
 
           {/* Main Headline */}
@@ -55,7 +55,7 @@ const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
           {/* Sub-headline */}
           <p className={`text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Media Agency specializing in <span className="text-primary font-semibold">cinematic reel edits</span>, 
-            delivered in just <span className="text-secondary font-semibold">20 minutes</span>.
+            delivered in just <span className="text-secondary font-semibold">30 minutes</span>.
           </p>
 
           {/* CTA Buttons */}
@@ -82,7 +82,7 @@ const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
           {/* Trust Indicators */}
           <div className={`grid grid-cols-3 gap-8 pt-16 max-w-3xl mx-auto transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="text-center space-y-2">
-              <div className="text-4xl font-heading font-black text-gradient">20</div>
+              <div className="text-4xl font-heading font-black text-gradient">30</div>
               <div className="text-sm text-muted-foreground uppercase tracking-wide">Minutes</div>
             </div>
             <div className="text-center space-y-2">
