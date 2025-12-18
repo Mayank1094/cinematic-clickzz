@@ -20,7 +20,7 @@ const Footer = () => {
               CLICKZZ.IN
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Precision visuals in 20 minutes. Your partner in cinematic content creation.
+              Precision visuals in 30 minutes. Your partner in cinematic content creation.
             </p>
           </div>
 
@@ -49,7 +49,7 @@ const Footer = () => {
               Services
             </h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>20-Minute Reels</li>
+              <li>30-Minute Reels</li>
               <li>Cinematic Editing</li>
               <li>Content Strategy</li>
               <li>iPhone Cinematography</li>
