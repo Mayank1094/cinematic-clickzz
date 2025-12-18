@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 const services = [
   {
     icon: Zap,
-    title: '20-MINUTE REELS',
+    title: '30-MINUTE REELS',
     description: 'Ultra-efficient turnaround using a refined, mobile-first workflow. From raw footage to polished reel in record time.',
     color: 'text-primary',
     gradient: 'from-primary/20 to-primary/5',
