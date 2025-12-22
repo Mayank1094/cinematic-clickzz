@@ -8,40 +8,47 @@ import reel3 from '@/assets/reel-3.jpg';
 import reel4 from '@/assets/reel-4.jpg';
 import reel5 from '@/assets/reel-5.jpg';
 import reel6 from '@/assets/reel-6.jpg';
+
+// Local Video Imports
 import post1 from '@/assets/post1.mp4';
+import post2 from '@/assets/post2.mp4';
+import post3 from '@/assets/post3.mp4';
+import post4 from '@/assets/post4.mp4';
+import post5 from '@/assets/post5.mp4';
+import post6 from '@/assets/post6.mp4';
 
 const works = [
   { 
     id: 1, 
-    image: reel1, 
-    title: 'Cinematic Reel', 
-    subtitle: 'Speed & Motion',
-    category: 'Automotive',
-    videoUrl: 'https://www.instagram.com/reel/DQokYWPEtvD/embed/' 
-  },
-  { 
-    id: 2, 
-    image: reel2, 
-    title: 'Action Sports', 
-    subtitle: 'Extreme Edition',
-    category: 'Sports',
-    videoUrl: 'https://www.instagram.com/reel/DPvZLdJEq35/embed/' 
-  },
-  { 
-    id: 3, 
-    image: reel3, 
-    title: 'Urban Stories', 
-    subtitle: 'City Vibes',
-    category: 'Lifestyle',
-    videoUrl: 'https://www.instagram.com/p/DP37PHtEjIu/embed/' 
-  },
-  { 
-    id: 4, 
     image: reel4, 
     title: 'Premium Edit', 
     subtitle: 'Full Production',
     category: 'Cinematic',
-    localVideo: post1
+    localVideo: post1 // post1 is now first
+  },
+  { 
+    id: 2, 
+    image: reel1, 
+    title: 'Cinematic Reel', 
+    subtitle: 'Speed & Motion',
+    category: 'Automotive',
+    localVideo: post2 
+  },
+  { 
+    id: 3, 
+    image: reel2, 
+    title: 'Action Sports', 
+    subtitle: 'Extreme Edition',
+    category: 'Sports',
+    localVideo: post3 
+  },
+  { 
+    id: 4, 
+    image: reel3, 
+    title: 'Urban Stories', 
+    subtitle: 'City Vibes',
+    category: 'Lifestyle',
+    localVideo: post4
   },
   { 
     id: 5, 
@@ -49,7 +56,7 @@ const works = [
     title: 'Brand Story', 
     subtitle: 'Visual Identity',
     category: 'Commercial',
-    videoUrl: 'https://www.instagram.com/reel/DQokYWPEtvD/embed/'
+    localVideo: post5
   },
   { 
     id: 6, 
@@ -57,7 +64,7 @@ const works = [
     title: 'Event Highlight', 
     subtitle: 'Moments Captured',
     category: 'Events',
-    videoUrl: 'https://www.instagram.com/reel/DPvZLdJEq35/embed/'
+    localVideo: post6
   },
 ];
 
@@ -79,8 +86,6 @@ const AllWorks = () => {
   const handleCardClick = (work: typeof works[0]) => {
     if (work.localVideo) {
       setSelectedVideo({ local: work.localVideo });
-    } else if (work.videoUrl) {
-      setSelectedVideo({ url: work.videoUrl });
     }
   };
 
@@ -97,7 +102,6 @@ const AllWorks = () => {
               </h2>
             </div>
             
-            {/* Static "All Works" button - non-functional as requested */}
             <div 
               className="hidden md:flex items-center gap-2 px-6 py-3 bg-muted rounded-full cursor-default"
             >
@@ -201,28 +205,20 @@ const AllWorks = () => {
 
       {/* Video Modal */}
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-        <DialogContent className={`${selectedVideo?.local ? 'max-w-sm' : 'max-w-sm'} w-full p-0 bg-background border border-border overflow-hidden rounded-2xl`}>
+        <DialogContent className="max-w-sm w-full p-0 bg-background border border-border overflow-hidden rounded-2xl">
           <DialogClose className="absolute top-4 right-4 z-50 rounded-full bg-background/80 p-2 hover:bg-muted transition-colors">
             <X className="h-5 w-5 text-foreground" />
           </DialogClose>
           
           {selectedVideo && (
             <div className="relative w-full pt-[130%]">
-              {selectedVideo.local ? (
+              {selectedVideo.local && (
                 <video
                   className="absolute inset-0 w-full h-full object-cover"
                   src={selectedVideo.local}
                   controls
                   autoPlay
                   playsInline
-                />
-              ) : (
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={selectedVideo.url}
-                  title="Video Player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
                 />
               )}
             </div>
