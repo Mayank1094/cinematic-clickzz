@@ -1,84 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Apple-inspired light design system */
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 94%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 94%;
+    --card: 0 0% 97%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 94%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 211 100% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 0 0% 4%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 45 100% 50%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 45 100% 50%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 211 100% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
     
-    /* Custom cinematic tokens */
-    --electric-yellow: 45 100% 50%;
-    --electric-blue: 180 100% 50%;
-    --deep-black: 0 0% 4%;
-    --silver-gray: 0 0% 94%;
-    --medium-gray: 0 0% 60%;
+    /* Apple-style tokens */
+    --apple-blue: 211 100% 45%;
+    --apple-text: 0 0% 7%;
+    --apple-subtext: 0 0% 45%;
+    --apple-bg-light: 0 0% 97%;
+    --apple-gradient: linear-gradient(90deg, #ff6b6b, #ffa500, #9b59b6, #3498db, #2ecc71);
     
-    /* Gradients */
-    --gradient-electric: linear-gradient(135deg, hsl(var(--electric-yellow)), hsl(var(--electric-blue)));
-    --gradient-dark: linear-gradient(180deg, hsl(var(--deep-black)), hsl(0 0% 8%));
-    
-    /* Shadows & Glows */
-    --glow-yellow: 0 0 40px hsl(var(--electric-yellow) / 0.4);
-    --glow-blue: 0 0 40px hsl(var(--electric-blue) / 0.3);
-    --shadow-intense: 0 20px 60px -10px hsl(0 0% 0% / 0.8);
+    /* Shadows - Apple style soft shadows */
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.08);
+    --shadow-hover: 0 8px 40px -8px hsl(0 0% 0% / 0.15);
     
     /* Transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    /* Dark mode uses same values as root for this dark-first design */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 94%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
   }
 }
 
@@ -89,13 +75,14 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
     letter-spacing: -0.02em;
+    color: hsl(var(--foreground));
   }
 }
 
@@ -116,18 +103,26 @@ All colors MUST be HSL.
     }
   }
   
-  .glow-yellow {
-    box-shadow: var(--glow-yellow);
-  }
-  
-  .glow-blue {
-    box-shadow: var(--glow-blue);
-  }
-  
-  .text-gradient {
-    background: var(--gradient-electric);
+  .text-gradient-apple {
+    background: var(--apple-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(90deg, hsl(var(--primary)), #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

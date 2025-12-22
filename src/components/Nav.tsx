@@ -24,7 +24,7 @@ const Nav = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-background/80 backdrop-blur-xl shadow-sm border-b border-border/50' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-6 py-4">
@@ -32,7 +32,7 @@ const Nav = () => {
           {/* Logo */}
           <button 
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-heading font-black tracking-tighter text-gradient hover:scale-105 transition-transform"
+            className="text-xl font-semibold tracking-tight text-foreground hover:opacity-70 transition-opacity"
           >
             CLICKZZ.IN
           </button>
@@ -43,10 +43,9 @@ const Nav = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                {item.toUpperCase()}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                {item}
               </button>
             ))}
           </div>
@@ -54,7 +53,7 @@ const Nav = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground hover:text-primary transition-colors"
+            className="md:hidden text-foreground hover:opacity-70 transition-opacity"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -67,9 +66,9 @@ const Nav = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="block w-full text-left py-3 text-sm font-medium text-foreground hover:text-primary hover:pl-4 transition-all"
+                className="block w-full text-left py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                {item.toUpperCase()}
+                {item}
               </button>
             ))}
           </div>

@@ -29,7 +29,6 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Check rate limiting (5 minutes cooldown)
     const lastSubmitTime = localStorage.getItem('lastContactSubmit');
     const now = Date.now();
     const fiveMinutes = 5 * 60 * 1000;
@@ -44,7 +43,6 @@ const Contact = () => {
       return;
     }
     
-    // Validate form data
     const validation = contactSchema.safeParse(formData);
     
     if (!validation.success) {
@@ -57,18 +55,15 @@ const Contact = () => {
       return;
     }
 
-    // Send to WhatsApp
     const { fullName, phoneNumber, email, eventDate, eventType, homeAddress } = validation.data;
     const whatsappNumber = '919900893382';
     const whatsappMessage = `*New Booking Request*\n\n*Full Name:* ${fullName}\n*Phone:* ${phoneNumber}\n*Email:* ${email}\n*Event Date:* ${eventDate}\n*Event Type:* ${eventType}\n*Home Address:* ${homeAddress}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     
-    // Store submission time
     localStorage.setItem('lastContactSubmit', now.toString());
     
     window.open(whatsappUrl, '_blank');
 
-    // Reset form
     setFormData({ fullName: '', phoneNumber: '', email: '', eventDate: '', eventType: 'Wedding', homeAddress: '' });
   };
 
@@ -80,16 +75,13 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-
+    <section id="contact" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 space-y-3">
-            <h2 className="text-5xl md:text-6xl font-heading font-black text-foreground">
-              Book Your Date
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4">
+              <span className="text-gradient-apple">Book your date.</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               Fill the form below. We will contact you to confirm details.
@@ -97,12 +89,12 @@ const Contact = () => {
           </div>
 
           {/* Booking Form */}
-          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-12 shadow-xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-background border border-border rounded-3xl p-8 md:p-10 shadow-apple">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* Row 1: Full Name & Phone Number */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label htmlFor="fullName" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  <label htmlFor="fullName" className="text-sm font-medium text-foreground">
                     Full Name
                   </label>
                   <Input
@@ -112,12 +104,12 @@ const Contact = () => {
                     placeholder="John Doe"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                    className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="phoneNumber" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  <label htmlFor="phoneNumber" className="text-sm font-medium text-foreground">
                     Phone Number
                   </label>
                   <Input
@@ -127,14 +119,14 @@ const Contact = () => {
                     placeholder="+91 98765 43210"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                    className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
                   />
                 </div>
               </div>
 
               {/* Row 2: Email Address */}
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                <label htmlFor="email" className="text-sm font-medium text-foreground">
                   Email Address
                 </label>
                 <Input
@@ -144,14 +136,14 @@ const Contact = () => {
                   placeholder="john@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                  className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
                 />
               </div>
 
               {/* Row 3: Event Date & Event Type */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label htmlFor="eventDate" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  <label htmlFor="eventDate" className="text-sm font-medium text-foreground">
                     Event Date
                   </label>
                   <Input
@@ -160,12 +152,12 @@ const Contact = () => {
                     type="date"
                     value={formData.eventDate}
                     onChange={handleChange}
-                    className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors h-12"
+                    className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="eventType" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                  <label htmlFor="eventType" className="text-sm font-medium text-foreground">
                     Event Type
                   </label>
                   <select
@@ -173,7 +165,7 @@ const Contact = () => {
                     name="eventType"
                     value={formData.eventType}
                     onChange={handleChange}
-                    className="w-full h-12 px-3 bg-background/50 border border-border rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors text-foreground"
+                    className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   >
                     <option value="Wedding">Wedding</option>
                     <option value="Pre-Wedding">Pre-Wedding</option>
@@ -188,7 +180,7 @@ const Contact = () => {
 
               {/* Row 4: Home Address */}
               <div className="space-y-2">
-                <label htmlFor="homeAddress" className="text-sm font-semibold text-primary uppercase tracking-wide">
+                <label htmlFor="homeAddress" className="text-sm font-medium text-foreground">
                   Home Address
                 </label>
                 <Textarea
@@ -198,15 +190,16 @@ const Contact = () => {
                   value={formData.homeAddress}
                   onChange={handleChange}
                   rows={3}
-                  className="bg-background/50 border border-border rounded-lg focus:border-primary transition-colors resize-none"
+                  className="bg-muted/50 border-border rounded-xl focus:ring-primary resize-none"
                 />
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
+                variant="apple"
                 size="lg"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02] h-12 mt-8"
+                className="w-full h-12 text-base mt-4"
               >
                 Book Now
               </Button>
@@ -214,18 +207,18 @@ const Contact = () => {
           </div>
 
           {/* Contact Info Below Form */}
-          <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="mt-10 grid md:grid-cols-2 gap-4">
             {/* Email */}
             <a
               href="mailto:clickzz.in1@gmail.com"
-              className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg text-foreground hover:text-primary hover:border-primary transition-all group"
+              className="flex items-center gap-4 p-5 bg-background border border-border rounded-2xl hover:shadow-apple transition-all group"
             >
-              <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Mail className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <Mail className="w-5 h-5 text-foreground" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Email</p>
-                <span className="font-semibold">clickzz.in1@gmail.com</span>
+                <p className="text-xs text-muted-foreground">Email</p>
+                <span className="font-medium text-foreground">clickzz.in1@gmail.com</span>
               </div>
             </a>
 
@@ -234,14 +227,14 @@ const Contact = () => {
               href="https://www.instagram.com/clickzz.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg text-foreground hover:text-secondary hover:border-secondary transition-all group"
+              className="flex items-center gap-4 p-5 bg-background border border-border rounded-2xl hover:shadow-apple transition-all group"
             >
-              <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                <Instagram className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <Instagram className="w-5 h-5 text-foreground" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Instagram</p>
-                <span className="font-semibold">@clickzz.in</span>
+                <p className="text-xs text-muted-foreground">Instagram</p>
+                <span className="font-medium text-foreground">@clickzz.in</span>
               </div>
             </a>
           </div>
