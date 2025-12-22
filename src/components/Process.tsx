@@ -52,7 +52,7 @@ const Process = () => {
   }, []);
 
   return (
-    <section id="process" className="py-24 bg-muted/30">
+    <section id="process" className="py-24 bg-[#f5f5f7]">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -70,25 +70,25 @@ const Process = () => {
               <div
                 key={index}
                 ref={(el) => (stepRefs.current[index] = el)}
-                className={`group relative p-8 bg-background rounded-3xl shadow-apple hover:shadow-apple-hover transition-all duration-500 ${
+                className={`group relative p-8 bg-background rounded-3xl shadow-apple hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
                   visibleSteps.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
                   transitionDelay: `${index * 150}ms`
                 }}
               >
-                {/* Step Number */}
-                <span className="absolute top-6 right-6 text-5xl font-bold text-muted/50">
+                {/* Step Number - More visible */}
+                <span className="absolute top-4 right-6 text-6xl font-bold text-gradient-apple opacity-80">
                   {step.number}
                 </span>
 
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-300">
                   <Icon className="w-7 h-7 text-primary" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
 

@@ -66,7 +66,7 @@ const Services = () => {
               <div
                 key={index}
                 ref={(el) => (cardRefs.current[index] = el)}
-                className={`group p-8 bg-card rounded-3xl shadow-apple hover:shadow-apple-hover transition-all duration-500 ${
+                className={`group p-8 bg-card rounded-3xl shadow-apple hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
                   visibleCards.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
@@ -74,12 +74,12 @@ const Services = () => {
                 }}
               >
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-300">
                   <Icon className="w-7 h-7 text-primary" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                   {service.title}
                 </h3>
 

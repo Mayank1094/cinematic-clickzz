@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import heroBg from '@/assets/hero-bg.jpg';
 import { useState, useEffect } from 'react';
 
 const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
@@ -20,26 +19,16 @@ const Hero = ({ onGalleryClick }: { onGalleryClick: () => void }) => {
   return (
     <section 
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f5f5f7]"
     >
-      {/* Background Image with Light Overlay */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background" />
-      </div>
+      {/* Clean gradient background - no image */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#f5f5f7] via-background to-background" />
 
       {/* Content */}
       <div className="container mx-auto px-6 py-32 relative z-10">
         <div className={`max-w-4xl mx-auto text-center space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Badge */}
-          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <span className="text-sm font-medium text-muted-foreground">30-MINUTE TURNAROUND</span>
           </div>
 
