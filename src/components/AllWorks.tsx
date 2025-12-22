@@ -20,7 +20,7 @@ import post6 from '@/assets/post6.mp4';
 const works = [
   { 
     id: 1, 
-    image: reel4, 
+    image: reel1, 
     title: 'Premium Edit', 
     subtitle: 'Full Production',
     category: 'Cinematic',
@@ -28,7 +28,7 @@ const works = [
   },
   { 
     id: 2, 
-    image: reel1, 
+    image: reel2, 
     title: 'Cinematic Reel', 
     subtitle: 'Speed & Motion',
     category: 'Automotive',
@@ -36,7 +36,7 @@ const works = [
   },
   { 
     id: 3, 
-    image: reel2, 
+    image: reel3, 
     title: 'Action Sports', 
     subtitle: 'Extreme Edition',
     category: 'Sports',
@@ -44,7 +44,7 @@ const works = [
   },
   { 
     id: 4, 
-    image: reel3, 
+    image: reel4, 
     title: 'Urban Stories', 
     subtitle: 'City Vibes',
     category: 'Lifestyle',
