@@ -101,7 +101,7 @@ const Contact = () => {
                     id="fullName"
                     name="fullName"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Your Name"
                     value={formData.fullName}
                     onChange={handleChange}
                     className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
@@ -116,7 +116,7 @@ const Contact = () => {
                     id="phoneNumber"
                     name="phoneNumber"
                     type="tel"
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 1234567899"
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
@@ -133,7 +133,7 @@ const Contact = () => {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="abc@gmail.com.com"
                   value={formData.email}
                   onChange={handleChange}
                   className="bg-muted/50 border-border rounded-xl h-12 focus:ring-primary"
