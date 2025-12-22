@@ -1,24 +1,23 @@
 import { Star, Quote } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useState, useEffect, useRef } from 'react';
 
 const testimonials = [
   {
-    name: 'dream High badminton Academy',
+    name: 'Dream High Badminton Academy',
     role: 'Badminton Academy',
-    content: 'Clickzz transformed our raw Academy coaching footage into cinematic masterpieces. The 20-minute turnaround is unbelievable! Our clients are absolutely thrilled with the quality.',
+    content: 'Clickzz transformed our raw Academy coaching footage into cinematic masterpieces. The 30-minute turnaround is unbelievable! Our clients are absolutely thrilled with the quality.',
     rating: 5,
   },
   {
     name: 'Ashapura Electricals',
     role: 'Electronic stores',
-    content: 'We needed a way to showcase our new product line and our storefront. Clickzz delivered a reel that was sharp, fast-paced, and incredibly high-quality. Our customers loved it, and we saw a direct increase in foot traffic from social media. They made our electrical products look cinematic, which we could not think was possible!',
+    content: 'We needed a way to showcase our new product line and our storefront. Clickzz delivered a reel that was sharp, fast-paced, and incredibly high-quality. Our customers loved it, and we saw a direct increase in foot traffic from social media.',
     rating: 5,
   },
   {
     name: 'Shreyas Kenikar',
     role: 'Rider',
-    content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—its all next-level. They delivered the final reel in just 20 minutes, faster than I could even pack up my gear. Absolutely game-changing!',
+    content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—its all next-level. They delivered the final reel in just 30 minutes, faster than I could even pack up my gear.',
     rating: 5,
   },
 ];
@@ -52,72 +51,55 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section id="testimonials" className="py-32 bg-gradient-to-b from-background to-muted/20 relative overflow-hidden">
-      {/* Background Accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-
+    <section id="testimonials" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-20 space-y-4">
-          <h2 className="text-5xl md:text-6xl font-heading font-black text-gradient">
-            CLIENT STORIES
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4">
+            <span className="text-gradient-apple">Client stories.</span>{' '}
+            <span className="text-muted-foreground">Real results.</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Hear from creators who've transformed their content with Clickzz.
-          </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <Card
+            <div
               key={index}
               ref={(el) => (cardRefs.current[index] = el)}
-              className={`group relative overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-700 hover:shadow-2xl hover:shadow-primary/20 bg-gradient-to-b from-secondary/5 to-background ${
+              className={`group p-8 bg-card rounded-3xl shadow-apple hover:shadow-apple-hover transition-all duration-500 ${
                 visibleCards.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ 
-                transitionDelay: `${index * 200}ms`
+                transitionDelay: `${index * 150}ms`
               }}
             >
-              <CardHeader className="space-y-6 p-8">
-                {/* Quote Icon */}
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-lg bg-card flex items-center justify-center border-2 border-border group-hover:border-primary/50 transition-all duration-500 group-hover:scale-110">
-                    <Quote className="w-8 h-8 text-primary group-hover:drop-shadow-glow transition-all" />
-                  </div>
-                </div>
+              {/* Quote Icon */}
+              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-6">
+                <Quote className="w-6 h-6 text-primary" />
+              </div>
 
-                {/* Rating */}
-                <div className="flex gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
+              {/* Rating */}
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                ))}
+              </div>
 
-                {/* Content */}
-                <CardDescription className="text-base text-muted-foreground leading-relaxed italic">
-                  "{testimonial.content}"
-                </CardDescription>
+              {/* Content */}
+              <p className="text-muted-foreground leading-relaxed mb-6 italic">
+                "{testimonial.content}"
+              </p>
 
-                {/* Author */}
-                <div className="pt-4 border-t border-border">
-                  <CardTitle className="text-lg font-heading font-black tracking-tight group-hover:text-primary transition-colors">
-                    {testimonial.name}
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">{testimonial.role}</p>
-                </div>
-
-                {/* Animated Border */}
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-700" />
-              </CardHeader>
-            </Card>
+              {/* Author */}
+              <div className="pt-4 border-t border-border">
+                <h4 className="font-semibold text-foreground">
+                  {testimonial.name}
+                </h4>
+                <p className="text-sm text-muted-foreground mt-1">{testimonial.role}</p>
+              </div>
+            </div>
           ))}
-        </div>
-
-        {/* Bottom Accent Line */}
-        <div className="mt-20 max-w-7xl mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
       </div>
     </section>

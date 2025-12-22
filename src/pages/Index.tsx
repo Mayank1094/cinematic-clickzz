@@ -1,7 +1,6 @@
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
-import Portfolio from '@/components/Portfolio';
-import Gallery from '@/components/Gallery';
+import AllWorks from '@/components/AllWorks';
 import Services from '@/components/Services';
 import Process from '@/components/Process';
 import Testimonials from '@/components/Testimonials';
@@ -9,8 +8,8 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 const Index = () => {
-  const scrollToGallery = () => {
-    const element = document.getElementById('gallery');
+  const scrollToWork = () => {
+    const element = document.getElementById('work');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -19,9 +18,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Nav />
-      <Hero onGalleryClick={scrollToGallery} />
-      <Portfolio />
-      <Gallery />
+      <Hero onGalleryClick={scrollToWork} />
+      <AllWorks />
       <Services />
       <Process />
       <Testimonials />
