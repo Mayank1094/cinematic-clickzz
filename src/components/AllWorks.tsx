@@ -1,13 +1,7 @@
 import { useState, useRef } from 'react';
-import { Play, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import reel1 from '@/assets/reel-1.jpg';
-import reel2 from '@/assets/reel-2.jpg';
-import reel3 from '@/assets/reel-3.jpg';
-import reel4 from '@/assets/reel-4.jpg';
-import reel5 from '@/assets/reel-5.jpg';
-import reel6 from '@/assets/reel-6.jpg';
 
 // Local Video Imports
 import post1 from '@/assets/post1.mp4';
@@ -20,15 +14,13 @@ import post6 from '@/assets/post6.mp4';
 const works = [
   { 
     id: 1, 
-    image: reel1, 
     title: 'Premium Edit', 
     subtitle: 'Full Production',
     category: 'Cinematic',
-    localVideo: post1 // post1 is now first
+    localVideo: post1
   },
   { 
     id: 2, 
-    image: reel2, 
     title: 'Cinematic Reel', 
     subtitle: 'Speed & Motion',
     category: 'Automotive',
@@ -36,7 +28,6 @@ const works = [
   },
   { 
     id: 3, 
-    image: reel3, 
     title: 'Action Sports', 
     subtitle: 'Extreme Edition',
     category: 'Sports',
@@ -44,7 +35,6 @@ const works = [
   },
   { 
     id: 4, 
-    image: reel4, 
     title: 'Urban Stories', 
     subtitle: 'City Vibes',
     category: 'Lifestyle',
@@ -52,7 +42,6 @@ const works = [
   },
   { 
     id: 5, 
-    image: reel5, 
     title: 'Brand Story', 
     subtitle: 'Visual Identity',
     category: 'Commercial',
@@ -60,7 +49,6 @@ const works = [
   },
   { 
     id: 6, 
-    image: reel6, 
     title: 'Event Highlight', 
     subtitle: 'Moments Captured',
     category: 'Events',
@@ -157,26 +145,16 @@ const AllWorks = () => {
                     </p>
                   </div>
 
-                  {/* Card Image */}
+                  {/* Card Video */}
                   <div className="flex-1 relative overflow-hidden">
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      className={`w-full h-full object-cover transition-transform duration-700 ${
-                        hoveredId === work.id ? 'scale-110' : 'scale-100'
-                      }`}
+                    <video
+                      src={work.localVideo}
+                      className="w-full h-full object-cover"
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
                     />
-                    
-                    {/* Play Overlay */}
-                    <div 
-                      className={`absolute inset-0 bg-black/20 flex items-center justify-center transition-opacity duration-300 ${
-                        hoveredId === work.id ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    >
-                      <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                        <Play className="w-7 h-7 text-foreground fill-current ml-1" />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -184,8 +162,11 @@ const AllWorks = () => {
           </div>
         </div>
 
-        {/* HD Button */}
+        {/* Compression Notice & HD Button */}
         <div className="container mx-auto px-6 mt-8 text-center">
+          <p className="text-sm text-muted-foreground mb-4">
+            Videos are compressed for faster website loading. View original quality below.
+          </p>
           <Button
             asChild
             variant="apple-outline"
