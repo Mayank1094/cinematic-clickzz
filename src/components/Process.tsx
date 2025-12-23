@@ -55,7 +55,9 @@ const Process = () => {
     <section id="process" className="py-24 bg-[#f5f5f7]">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${
+          visibleSteps.length > 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4">
             <span className="text-gradient-apple">Our process.</span>{' '}
             <span className="text-muted-foreground">Simple and effective.</span>
@@ -102,7 +104,9 @@ const Process = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
+        <div className={`text-center mt-16 transition-all duration-700 delay-500 ${
+          visibleSteps.length === 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <p className="text-xl text-foreground mb-6">
             Ready to start your project?
           </p>
