@@ -79,7 +79,7 @@ const Contact = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4">
               <span className="text-gradient-apple">Book your date.</span>
             </h2>
@@ -89,7 +89,7 @@ const Contact = () => {
           </div>
 
           {/* Booking Form */}
-          <div className="bg-background border border-border rounded-3xl p-8 md:p-10 shadow-apple">
+          <div className="bg-background border border-border rounded-3xl p-8 md:p-10 shadow-apple animate-fade-in" style={{ animationDelay: '150ms' }}>
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Row 1: Full Name & Phone Number */}
               <div className="grid md:grid-cols-2 gap-5">

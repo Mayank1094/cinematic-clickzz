@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // Local Video Imports
 import post1 from '@/assets/post1.mp4';
@@ -60,6 +61,7 @@ const AllWorks = () => {
   const [selectedVideo, setSelectedVideo] = useState<{ url?: string; local?: string } | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.15 });
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -78,10 +80,12 @@ const AllWorks = () => {
   };
 
   return (
-    <section id="work" className="py-20 bg-background">
+    <section id="work" className="py-20 bg-background" ref={sectionRef}>
       <div className="max-w-full">
         {/* Section Header */}
-        <div className="container mx-auto px-6 mb-8">
+        <div className={`container mx-auto px-6 mb-8 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-2">
@@ -99,7 +103,9 @@ const AllWorks = () => {
         </div>
 
         {/* Horizontal Scroll Container */}
-        <div className="relative">
+        <div className={`relative transition-all duration-700 delay-200 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           {/* Left Arrow */}
           <button
             onClick={() => scroll('left')}
@@ -163,7 +169,9 @@ const AllWorks = () => {
         </div>
 
         {/* Compression Notice & HD Button */}
-        <div className="container mx-auto px-6 mt-8 text-center">
+        <div className={`container mx-auto px-6 mt-8 text-center transition-all duration-700 delay-400 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <p className="text-sm text-muted-foreground mb-4">
             Videos are compressed for faster website loading. View original quality below.
           </p>

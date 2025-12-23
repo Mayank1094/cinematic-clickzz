@@ -54,7 +54,9 @@ const Testimonials = () => {
     <section id="testimonials" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${
+          visibleCards.length > 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4">
             <span className="text-gradient-apple">Client stories.</span>{' '}
             <span className="text-muted-foreground">Real results.</span>
