@@ -18,14 +18,14 @@ const works = [
     title: 'Premium Edit', 
     subtitle: 'Full Production',
     category: 'Cinematic',
-    localVideo: post1
+    localVideo: post2
   },
   { 
     id: 2, 
     title: 'Cinematic Reel', 
     subtitle: 'Speed & Motion',
     category: 'Automotive',
-    localVideo: post2 
+    localVideo: post1
   },
   { 
     id: 3, 
