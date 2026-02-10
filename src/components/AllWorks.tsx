@@ -25,14 +25,14 @@ const works = [
     title: 'Cinematic Reel', 
     subtitle: 'Speed & Motion',
     category: 'Automotive',
-    localVideo: post1
+    localVideo: post3
   },
   { 
     id: 3, 
     title: 'Action Sports', 
     subtitle: 'Extreme Edition',
     category: 'Sports',
-    localVideo: post3 
+    localVideo: post1 
   },
   { 
     id: 4, 
