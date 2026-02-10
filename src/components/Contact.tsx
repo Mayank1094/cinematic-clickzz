@@ -6,6 +6,8 @@ import { Instagram, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 
+const WEB3FORMS_ACCESS_KEY = '7f3d4446-4086-469f-9516-5696bd132ac6';
+
 const contactSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(100, "Name must be less than 100 characters"),
   phoneNumber: z.string().trim().min(10, "Valid phone number is required").max(15, "Phone number must be less than 15 characters"),
@@ -17,6 +19,7 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -26,7 +29,7 @@ const Contact = () => {
     homeAddress: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const lastSubmitTime = localStorage.getItem('lastContactSubmit');
@@ -55,16 +58,48 @@ const Contact = () => {
       return;
     }
 
-    const { fullName, phoneNumber, email, eventDate, eventType, homeAddress } = validation.data;
-    const whatsappNumber = '919900893382';
-    const whatsappMessage = `*New Booking Request*\n\n*Full Name:* ${fullName}\n*Phone:* ${phoneNumber}\n*Email:* ${email}\n*Event Date:* ${eventDate}\n*Event Type:* ${eventType}\n*Home Address:* ${homeAddress}`;
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    localStorage.setItem('lastContactSubmit', now.toString());
-    
-    window.open(whatsappUrl, '_blank');
+    setIsSubmitting(true);
 
-    setFormData({ fullName: '', phoneNumber: '', email: '', eventDate: '', eventType: 'Wedding', homeAddress: '' });
+    try {
+      const { fullName, phoneNumber, email, eventDate, eventType, homeAddress } = validation.data;
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New Booking Request - ${eventType}`,
+          from_name: fullName,
+          name: fullName,
+          email: email,
+          phone: phoneNumber,
+          event_date: eventDate,
+          event_type: eventType,
+          home_address: homeAddress,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        localStorage.setItem('lastContactSubmit', now.toString());
+        toast({
+          title: 'Booking Sent! ✅',
+          description: 'We received your request and will contact you soon.',
+        });
+        setFormData({ fullName: '', phoneNumber: '', email: '', eventDate: '', eventType: 'Wedding', homeAddress: '' });
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch {
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try again or contact us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -200,8 +235,9 @@ const Contact = () => {
                 variant="apple"
                 size="lg"
                 className="w-full h-12 text-base mt-4"
+                disabled={isSubmitting}
               >
-                Book Now
+                {isSubmitting ? 'Sending...' : 'Book Now'}
               </Button>
             </form>
           </div>
