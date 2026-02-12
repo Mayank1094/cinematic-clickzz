@@ -172,14 +172,15 @@ const AllWorks = () => {
         <div className={`container mx-auto px-6 mt-8 text-center transition-all duration-700 delay-400 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-muted-foreground/80 mb-4 bg-muted/60 inline-block px-4 py-2 rounded-full">
             Videos are compressed for faster website loading. View original quality below.
           </p>
+          <br />
           <Button
             asChild
             variant="apple-outline"
             size="lg"
-            className="text-base"
+            className="text-base font-semibold border-2 shadow-sm hover:shadow-md"
           >
             <a 
               href="https://drive.google.com/drive/folders/1cDPDdl3IZE_egO0jO8f2sgycEDu9xuxI" 
