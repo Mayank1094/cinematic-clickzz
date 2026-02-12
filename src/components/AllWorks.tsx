@@ -37,7 +37,7 @@ const works = [
   { 
     id: 4, 
     title: 'Urban Stories', 
-    subtitle: 'City Vibes',
+    subtitle: 'Leadership Highlight',
     category: 'Lifestyle',
     localVideo: post4
   },
