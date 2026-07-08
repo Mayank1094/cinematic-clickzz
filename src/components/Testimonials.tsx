@@ -15,7 +15,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'Shreyas Kenikar',
+    name: 'Pranav Chotu',
     role: 'Rider',
     content: 'Clickzz turned my raw riding clips into pure cinematic gold. The speed, the quality, the editing—its all next-level. They delivered the final reel in just 30 minutes, faster than I could even pack up my gear.',
     rating: 5,
